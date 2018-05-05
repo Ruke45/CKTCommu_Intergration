@@ -13,6 +13,7 @@
         <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles for this template-->
         <link href="~/Content/css/sb-admin.css" rel="stylesheet" />
+
       <script src="~/Content/vendor/jquery/jquery.min.js"></script>
 
     </head>
@@ -272,17 +273,16 @@
     <script src="~/Scripts/timepicki.js"></script>
     <script src="~/Scripts/bootstrap-popover.js"></script>*@
     
-
-
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-migrate-1.2.1.min.js"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
-    <script src="~/Scripts/js/sb-admin.min.js"></script>
-
-    @Scripts.Render("~/Scripts/js")
+    <script src="~/Scripts/js/site.min.js"></script>
 
     @RenderSection("scripts", required: false)
   </div>

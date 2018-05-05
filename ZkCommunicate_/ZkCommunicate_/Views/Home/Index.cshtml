@@ -1,3 +1,97 @@
-﻿@{
+﻿@model ZkCommunicate_.Models.Connect_deviceModel
+@{
     ViewBag.Title = "Home Page";
 }
+<!-- Page level plugin CSS-->
+<link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Tables</li>
+</ol>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-area-chart"></i>Connect Device
+            </div>
+            <div class="card-body">
+                <form id="FrmConnect">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="exampleInputName">IP</label>
+                                @Html.TextBoxFor(model => model.Device_IP, new { @class = "form-control mb", @placeholder = "Enter Device IP Address", })
+                                @Html.ValidationMessageFor(model => model.Device_IP, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputLastName">Port</label>
+                                @Html.TextBoxFor(model => model.Port, new { @class = "form-control mb", @placeholder = "Enter Device Port", })
+                                @Html.ValidationMessageFor(model => model.Port, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="Connect();">Connect </button>
+                </form>
+            </div>
+            <div class="card-footer small text-muted">
+     
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i>Data Table Example
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Example DataTables Card-->
+
+
+<!-- Page level plugin JavaScript-->
+<script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+<script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+<!-- Custom scripts for this page-->
+<script src="~/Scripts/js/site.datatables.min.js"></script>
+
+
+<script>
+    var Connect = function () {
+        var myformdata = $("#FrmConnect").serialize();
+        
+        if (!$("#FrmConnect").valid()) {
+            return false;
+        }
+        //$("#loaderDivlogin").show();
+        //$("#btnCreateTeacher").prop('value', 'Saving');
+        $.ajax({
+
+            type: "POST",
+            url: "/Home/ConnectToDevice",
+            data: myformdata,
+            success: function (result) {
+                if (result == "Succes") {
+                    window.location.href = "/Home/Index/5";
+                }
+                else if (result == "Failed") {
+                    $("#lblError").text("Incorrect User Name Or Password");
+                    $("#loaderDivlogin").hide();
+                }
+                else {
+                    $("#lblError").text("Unable to Login ! Please Try Again !");
+                    $("#loaderDivlogin").hide();
+                }
+
+            }
+
+        })
+    }
+</script>
