@@ -37,18 +37,8 @@ namespace ZkCommunicate_.Controllers
         [HttpPost]
         public JsonResult ConnectToDevice(Connect_deviceModel Model)
         {
-            string result = "Error";
             string Connect = DManager.Connect_Tcpip(Model.Device_IP, Model.Port);
-
-            if (Connect == "Connected")
-            {
-                result = "Succes";
-            }
-            else
-            {
-                result = "Failed";
-            }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(Connect, JsonRequestBehavior.AllowGet);
         }
     }
 }

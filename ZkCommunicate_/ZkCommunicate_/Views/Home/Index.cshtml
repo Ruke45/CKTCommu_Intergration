@@ -33,11 +33,11 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="button" onclick="Connect();">Connect </button>
+                    <button class="btn btn-primary" id="btnConnect" type="button" onclick="Connect();">Connect  <span style="text-align: center; display: none" id="LOADINGgif"><img  src="~/Images/ellipsis.gif"/></span> </button>
                 </form>
             </div>
             <div class="card-footer small text-muted">
-     
+                  <label id="lblConnectError" class="control-label" style="color: #e83a3a"></label>
             </div>
         </div>
         </div>
@@ -70,24 +70,21 @@
         if (!$("#FrmConnect").valid()) {
             return false;
         }
-        //$("#loaderDivlogin").show();
-        //$("#btnCreateTeacher").prop('value', 'Saving');
+        $("#LOADINGgif").show();
+        $("#btnConnect").prop('value', 'Connecting');
         $.ajax({
 
             type: "POST",
             url: "/Home/ConnectToDevice",
             data: myformdata,
             success: function (result) {
-                if (result == "Succes") {
-                    window.location.href = "/Home/Index/5";
-                }
-                else if (result == "Failed") {
-                    $("#lblError").text("Incorrect User Name Or Password");
-                    $("#loaderDivlogin").hide();
+                if (result == "Connected") {
+                    $("#lblConnectError").text(result);
+                    $("#LOADINGgif").hide();
                 }
                 else {
-                    $("#lblError").text("Unable to Login ! Please Try Again !");
-                    $("#loaderDivlogin").hide();
+                    $("#lblConnectError").text(result);
+                    $("#LOADINGgif").hide();
                 }
 
             }
